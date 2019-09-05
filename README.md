@@ -1,6 +1,8 @@
 # DAMoviles
 Repositorio para la materia Desarrollo de aplicaciones para dispositivos móviles.
 
+## Presentación
+[Frameworks Hybrid Mobile App Development](https://docs.google.com/presentation/d/1kkr6dlAUUEzUdRizqAW_tTHbWJ7c6ZQ_sdZf8WJtO9w/edit?usp=sharing)
 
 ## Retos
 ### Reto 0
