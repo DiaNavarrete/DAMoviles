@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Reto</string>
+    <string name="titulo_app">Mi hola mundo </string>
 </resources>
