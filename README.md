@@ -19,3 +19,5 @@ Propuesta de proyecto
 [prototipo emulado](https://share.proto.io/2XUFX8/),
 [ver pdf con los screens](https://drive.google.com/file/d/10o2p91KloCrdMVUlwg4zDlgzyGdctVM5/view?usp=sharing)
 
+### Reto 3
+Interfaz gráfica: [TicTacToe](https://github.com/DiaNavarrete/DAMoviles/tree/master/AndroidTicTacToe)
