@@ -2,11 +2,8 @@ package co.edu.unal.tictactoe;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextSwitcher;
 import android.widget.TextView;
 
 
@@ -47,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
     private void startNewGame() {
 
         mGame.clearBoard(mBoardButtons);
+        for (int i = 0; i < mBoardButtons.length; i++) {
+            mBoardButtons[i].setOnClickListener(new ButtonClickListener(i));
+        }
         // Human goes first
         mInfoTextView.setText("You go first.");
 
