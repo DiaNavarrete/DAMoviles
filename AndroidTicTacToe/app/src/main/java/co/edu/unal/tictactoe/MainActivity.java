@@ -2,6 +2,8 @@ package co.edu.unal.tictactoe;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -44,14 +46,24 @@ public class MainActivity extends AppCompatActivity {
     private void startNewGame() {
 
         mGame.clearBoard(mBoardButtons);
-        for (int i = 0; i < mBoardButtons.length; i++) {
+        for (int i = 0; i < mBoardButtons.length; i++)
             mBoardButtons[i].setOnClickListener(new ButtonClickListener(i));
-        }
         // Human goes first
         mInfoTextView.setText("You go first.");
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        menu.add("New Game");
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        startNewGame();
+        return true;
+    }
 
 
     public class ButtonClickListener implements View.OnClickListener {
@@ -78,10 +90,14 @@ public class MainActivity extends AppCompatActivity {
                     mInfoTextView.setText("It's your turn.");
                 else if (winner == 1)
                     mInfoTextView.setText("It's a tie!");
-                else if (winner == 2)
-                    mInfoTextView.setText("You won!");
-                else
-                    mInfoTextView.setText("Android won!");
+                else {
+                    for (int i = 0; i < mBoardButtons.length; i++)
+                        mBoardButtons[location].setEnabled(false);
+                    if (winner == 2)
+                        mInfoTextView.setText("You won!");
+                    else
+                        mInfoTextView.setText("Android won!");
+                }
             }
         }
 

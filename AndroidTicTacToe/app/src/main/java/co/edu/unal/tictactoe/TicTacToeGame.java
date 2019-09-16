@@ -44,7 +44,6 @@ public class TicTacToeGame {
         // First see if there's a move O can make to win
         for (int i = 0; i < BOARD_SIZE; i++) {
             if ((mBoardButtons[i].getText() != HUMAN_PLAYER) && (mBoardButtons[i].getText() != COMPUTER_PLAYER)) {
-                //String curr = mBoardButtons[i].getText();
                 mBoardButtons[i].setText( COMPUTER_PLAYER);
                 if (checkForWinner( mBoardButtons,  mInfoTextView) == 3) {
                     System.out.println("Computer is moving to " + (i + 1));
@@ -58,7 +57,6 @@ public class TicTacToeGame {
         // See if there's a move O can make to block X from winning
         for (int i = 0; i < BOARD_SIZE; i++) {
             if (mBoardButtons[i].getText() != HUMAN_PLAYER && mBoardButtons[i].getText() != COMPUTER_PLAYER) {
-                //char curr = mBoardButtons[i].getText().charAt(0);   // Save the current number
                 mBoardButtons[i].setText(HUMAN_PLAYER);
                 if (checkForWinner( mBoardButtons,  mInfoTextView) == 2) {
                     mBoardButtons[i].setText(COMPUTER_PLAYER);
