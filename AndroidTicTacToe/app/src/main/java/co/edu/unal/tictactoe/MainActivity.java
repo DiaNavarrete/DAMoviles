@@ -21,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
     // Various text displayed
     private TextView mInfoTextView;
 
+    private TextView mTextHuman;
+    private TextView mTextTie;
+    private TextView mTextAndroid;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +42,14 @@ public class MainActivity extends AppCompatActivity {
         mBoardButtons[6] = findViewById(R.id.seven);
         mBoardButtons[7] = findViewById(R.id.eight);
         mBoardButtons[8] = findViewById(R.id.nine);
+        mTextAndroid = findViewById(R.id.ptsAndroid);
+        mTextHuman = findViewById(R.id.ptsHuman);
+        mTextTie = findViewById(R.id.ptsTie);
 
         mGame = new TicTacToeGame();
+        mTextTie.setText("0");
+        mTextHuman.setText("0");
+        mTextAndroid.setText("0");
         startNewGame();
     }
     // Set up the game board.
@@ -49,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < mBoardButtons.length; i++)
             mBoardButtons[i].setOnClickListener(new ButtonClickListener(i));
         // Human goes first
-        mInfoTextView.setText("You go first.");
+        mInfoTextView.setText(R.string.turn_human);
 
     }
 
@@ -80,23 +90,33 @@ public class MainActivity extends AppCompatActivity {
                 // If no winner yet, let the computer make a move
                 int winner = mGame.checkForWinner( mBoardButtons,  mInfoTextView);
                 if (winner == 0) {
-                    mInfoTextView.setText("It's Android's turn.");
+                    mInfoTextView.setText(R.string.turn_android);
                     int move = mGame.getComputerMove( mBoardButtons,  mInfoTextView);
                     mGame.setMove(TicTacToeGame.COMPUTER_PLAYER, move, mBoardButtons,  mInfoTextView);
                     winner = mGame.checkForWinner( mBoardButtons,  mInfoTextView);
                 }
 
                 if (winner == 0)
-                    mInfoTextView.setText("It's your turn.");
-                else if (winner == 1)
-                    mInfoTextView.setText("It's a tie!");
-                else {
+                    mInfoTextView.setText(R.string.turn_human);
+                else{
                     for (int i = 0; i < mBoardButtons.length; i++)
-                        mBoardButtons[location].setEnabled(false);
-                    if (winner == 2)
-                        mInfoTextView.setText("You won!");
-                    else
-                        mInfoTextView.setText("Android won!");
+                        mBoardButtons[i].setEnabled(false);
+                    if (winner == 1) {
+                        mInfoTextView.setText(R.string.result_tie);
+                        mGame.mPtsTie+=1;
+                        mTextTie.setText(String.valueOf(mGame.mPtsTie));
+                    }
+                    else if (winner == 2) {
+                        mInfoTextView.setText(R.string.result_human_wins);
+                        mGame.mPtsHuman += 1;
+                        mTextHuman.setText(String.valueOf(mGame.mPtsHuman));
+                    }
+                    else {
+                        mInfoTextView.setText(R.string.result_android_wins);
+                        mGame.mPtsAndroid+=1;
+                        mTextAndroid.setText(String.valueOf(mGame.mPtsAndroid));
+                    }
+                    System.out.println(mGame.mPtsHuman + " " + mGame.mPtsTie + " " + mGame.mPtsAndroid);
                 }
             }
         }

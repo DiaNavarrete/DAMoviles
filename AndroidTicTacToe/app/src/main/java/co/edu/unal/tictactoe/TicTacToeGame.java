@@ -14,11 +14,18 @@ public class TicTacToeGame {
     public static final String COMPUTER_PLAYER = "O";
     public static final String OPEN_SPOT = " ";
 
+    protected int mPtsHuman;
+    protected int mPtsTie;
+    protected int mPtsAndroid;
+
     private Random mRand;
 
     public TicTacToeGame() {
         // Seed the random number generator
         mRand = new Random();
+        mPtsHuman=0;
+        mPtsTie=0;
+        mPtsAndroid=0;
 
     }
 
