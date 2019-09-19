@@ -6,5 +6,15 @@
     <string name="result_tie">It\'s a tie.</string>
     <string name="result_human_wins">You won!</string>
     <string name="result_android_wins">Android won!</string>
+    <string name="difficulty_easy">Easy</string>
+    <string name="difficulty_harder">Harder</string>
+    <string name="difficulty_expert">Expert</string>
+    <string name="difficulty_choose">Expert</string>
+    <string name="quit_question">Are you sure you want to quit?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="By">Tic-Tac-Toe\nBy Diana Navarrete</string>
+    <string name="description">Choosse from one of three difficulty levels.\n Don\'t let the Android beat you!</string>
+    <string name="icon_description">icon</string>
 
 </resources>

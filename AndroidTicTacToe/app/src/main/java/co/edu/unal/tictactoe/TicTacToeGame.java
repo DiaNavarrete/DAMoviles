@@ -8,6 +8,13 @@ import java.util.Random;
 
 public class TicTacToeGame {
 
+    // The computer's difficulty levels
+    public enum DifficultyLevel {Easy, Harder, Expert};
+
+    // Current difficulty level
+    private DifficultyLevel mDifficultyLevel = DifficultyLevel.Expert;
+
+
     public static final int BOARD_SIZE = 9;
 
     public static final String HUMAN_PLAYER = "X";
@@ -28,6 +35,16 @@ public class TicTacToeGame {
         mPtsAndroid=0;
 
     }
+    public DifficultyLevel getDifficultyLevel() {
+        return mDifficultyLevel;
+    }
+
+    public boolean setDifficultyLevel(DifficultyLevel difficultyLevel) {
+        boolean mchange=true;
+        if( mDifficultyLevel==difficultyLevel) mchange=false;
+        mDifficultyLevel = difficultyLevel;
+        return mchange;
+    }
 
 
     /** Clear the board of all X's and O's by setting all spots to OPEN_SPOT. */
@@ -46,8 +63,29 @@ public class TicTacToeGame {
      */
     public int getComputerMove(Button[] mBoardButtons, TextView mInfoTextView){
 
-        int move;
+        int move = -1;
 
+        if (mDifficultyLevel == DifficultyLevel.Easy)
+            move = getRandomMove(mBoardButtons);
+        else if (mDifficultyLevel == DifficultyLevel.Harder) {
+            move = getWinningMove(mBoardButtons, mInfoTextView);
+            if (move == -1)
+                move = getRandomMove(mBoardButtons);
+        }
+        else if (mDifficultyLevel == DifficultyLevel.Expert) {
+
+            // Try to win, but if that's not possible, block.
+            // If that's not possible, move anywhere.
+            move = getWinningMove(mBoardButtons, mInfoTextView);
+            if (move == -1)
+                move = getBlockingMove(mBoardButtons, mInfoTextView);
+            if (move == -1)
+                move = getRandomMove(mBoardButtons);
+        }
+//mBoardButtons[move].setText(COMPUTER_PLAYER);
+        return move;
+    }
+    private int getWinningMove(Button[] mBoardButtons, TextView mInfoTextView){
         // First see if there's a move O can make to win
         for (int i = 0; i < BOARD_SIZE; i++) {
             if ((mBoardButtons[i].getText() != HUMAN_PLAYER) && (mBoardButtons[i].getText() != COMPUTER_PLAYER)) {
@@ -60,7 +98,9 @@ public class TicTacToeGame {
                     mBoardButtons[i].setText(OPEN_SPOT);
             }
         }
-
+        return -1;
+    }
+    private int getBlockingMove(Button[] mBoardButtons, TextView mInfoTextView){
         // See if there's a move O can make to block X from winning
         for (int i = 0; i < BOARD_SIZE; i++) {
             if (mBoardButtons[i].getText() != HUMAN_PLAYER && mBoardButtons[i].getText() != COMPUTER_PLAYER) {
@@ -74,18 +114,18 @@ public class TicTacToeGame {
                     mBoardButtons[i].setText(OPEN_SPOT);
             }
         }
-
+        return -1;
+    }
+    private int getRandomMove(Button[] mBoardButtons){
+        int move=-1;
         // Generate random move
         do
         {
             move = mRand.nextInt(BOARD_SIZE);
         } while (mBoardButtons[move].getText() == HUMAN_PLAYER || mBoardButtons[move].getText() == COMPUTER_PLAYER);
-
-        System.out.println("Computer is moving to " + (move + 1));
-
-        mBoardButtons[move].setText(COMPUTER_PLAYER);
         return move;
     }
+
 
     /**
      * Check for a winner and return a status value indicating who has won.
