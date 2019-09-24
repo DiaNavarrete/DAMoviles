@@ -21,3 +21,6 @@ Propuesta de proyecto
 
 ### Reto 3
 Interfaz gráfica: [TicTacToe](https://github.com/DiaNavarrete/DAMoviles/tree/master/AndroidTicTacToe)
+
+## Reto 4
+Menús y diálogos: [TicaTacToe](https://github.com/DiaNavarrete/DAMoviles/tree/master/AndroidTicTacToe)
