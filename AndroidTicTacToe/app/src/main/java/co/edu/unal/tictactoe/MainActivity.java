@@ -7,6 +7,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.media.MediaPlayer;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
     private TicTacToeGame mGame;
     private BoardView mBoardView;
     private boolean mGameOver;
+    private MediaPlayer mHumanMediaPlayer;
+    private MediaPlayer mComputerMediaPlayer;
+
+
 
     // Various text displayed
     private TextView mInfoTextView;
@@ -67,6 +73,22 @@ public class MainActivity extends AppCompatActivity {
 
         mInfoTextView.setText(R.string.turn_human);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mHumanMediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.bip);
+        mComputerMediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.bib);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        mHumanMediaPlayer.release();
+        mComputerMediaPlayer.release();
     }
 
     @Override
@@ -185,12 +207,13 @@ public class MainActivity extends AppCompatActivity {
             if (!mGameOver && setMove(TicTacToeGame.HUMAN_PLAYER, pos))	{
 
                 // If no winner yet, let the computer make a move
-                int winner = mGame.checkForWinner(   mInfoTextView);
+                int winner = mGame.checkForWinner(   );
                 if (winner == 0) {
                     mInfoTextView.setText(R.string.turn_android);
-                    int move = mGame.getComputerMove(   mInfoTextView);
-                    mGame.setMove(TicTacToeGame.COMPUTER_PLAYER, move);
-                    winner = mGame.checkForWinner(   mInfoTextView);
+                    int move = mGame.getComputerMove(   );
+
+                    setMove(TicTacToeGame.COMPUTER_PLAYER, move);
+                    winner = mGame.checkForWinner(   );
                 }
 
                 if (winner == 0)
@@ -224,9 +247,25 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean setMove(char player, int location) {
         if (mGame.setMove(player, location)) {
+            if(player== TicTacToeGame.HUMAN_PLAYER){
+                mHumanMediaPlayer.start();
+
+            }
+            else{
+
+               /* Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        //Log.v(LOG_TAG, "Hello");
+                        mComputerMediaPlayer.start();
+                    }
+                }, 2000);*/
+            }
             mBoardView.invalidate();   // Redraw the board
+
             return true;
         }
+        //mComputerMediaPlayer.start();
         return false;
     }
 

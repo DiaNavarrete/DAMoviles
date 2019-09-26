@@ -65,14 +65,14 @@ public class TicTacToeGame {
      * to actually make the computer move to that location.
      * @return The best move for the computer to make (0-8).
      */
-    public int getComputerMove(TextView mInfoTextView){
+    public int getComputerMove( ){
 
         int move = -1;
 
         if (mDifficultyLevel == DifficultyLevel.Easy)
             move = getRandomMove();
         else if (mDifficultyLevel == DifficultyLevel.Harder) {
-            move = getWinningMove( mInfoTextView);
+            move = getWinningMove( );
             if (move == -1)
                 move = getRandomMove();
         }
@@ -80,21 +80,21 @@ public class TicTacToeGame {
 
             // Try to win, but if that's not possible, block.
             // If that's not possible, move anywhere.
-            move = getWinningMove( mInfoTextView);
+            move = getWinningMove( );
             if (move == -1)
-                move = getBlockingMove( mInfoTextView);
+                move = getBlockingMove( );
             if (move == -1)
                 move = getRandomMove();
         }
 //mBoardButtons[move].setText(COMPUTER_PLAYER);
         return move;
     }
-    private int getWinningMove(TextView mInfoTextView){
+    private int getWinningMove( ){
         // First see if there's a move O can make to win
         for (int i = 0; i < BOARD_SIZE; i++) {
             if ((mBoard[i] != HUMAN_PLAYER) && (mBoard[i] != COMPUTER_PLAYER)) {
                 mBoard[i]= COMPUTER_PLAYER;
-                if (checkForWinner(mInfoTextView) == 3) {
+                if (checkForWinner() == 3) {
                     System.out.println("Computer is moving to " + (i + 1));
                     return i;
                 }
@@ -104,12 +104,12 @@ public class TicTacToeGame {
         }
         return -1;
     }
-    private int getBlockingMove(TextView mInfoTextView){
+    private int getBlockingMove( ){
         // See if there's a move O can make to block X from winning
         for (int i = 0; i < BOARD_SIZE; i++) {
             if (mBoard[i] != HUMAN_PLAYER && mBoard[i] != COMPUTER_PLAYER) {
                 mBoard[i]= HUMAN_PLAYER;
-                if (checkForWinner( mInfoTextView) == 2) {
+                if (checkForWinner( ) == 2) {
                     mBoard[i]=COMPUTER_PLAYER;
                     System.out.println("Computer is moving to " + (i + 1));
                     return i;
@@ -136,7 +136,7 @@ public class TicTacToeGame {
      * @return Return 0 if no winner or tie yet, 1 if it's a tie, 2 if X won,
      * or 3 if O won.
      */
-    public int checkForWinner( TextView mInfoTextView){
+    public int checkForWinner(  ){
 
         // Check horizontal wins
         for (int i = 0; i <= 6; i += 3)	{

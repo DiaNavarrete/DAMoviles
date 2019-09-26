@@ -46,7 +46,6 @@ public class BoardView extends View {
         mGame = game;
     }
 
-
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
