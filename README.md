@@ -1,4 +1,4 @@
-# DAMoviles
+[# DAMoviles
 Repositorio para la materia Desarrollo de aplicaciones para dispositivos móviles.
 
 ## Presentación
@@ -23,4 +23,7 @@ Propuesta de proyecto
 Interfaz gráfica: [TicTacToe](https://github.com/DiaNavarrete/DAMoviles/tree/master/AndroidTicTacToe)
 
 ## Reto 4
-Menús y diálogos: [TicaTacToe](https://github.com/DiaNavarrete/DAMoviles/tree/master/AndroidTicTacToe)
+Menús y diálogos: [TicTacToe](https://github.com/DiaNavarrete/DAMoviles/tree/master/AndroidTicTacToe)
+
+## Reto 5
+[Gráficos y audio](https://github.com/DiaNavarrete/DAMoviles/tree/reto5)
