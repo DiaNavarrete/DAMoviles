@@ -17,9 +17,10 @@ public class TicTacToeGame {
 
     public static final int BOARD_SIZE = 9;
 
-    public static final String HUMAN_PLAYER = "X";
-    public static final String COMPUTER_PLAYER = "O";
-    public static final String OPEN_SPOT = " ";
+    public static final char HUMAN_PLAYER = 'X';
+    public static final char COMPUTER_PLAYER = 'O';
+    public static final char OPEN_SPOT = ' ';
+    private char[] mBoard;
 
     protected int mPtsHuman;
     protected int mPtsTie;
@@ -33,6 +34,7 @@ public class TicTacToeGame {
         mPtsHuman=0;
         mPtsTie=0;
         mPtsAndroid=0;
+        mBoard= new char[9];
 
     }
     public DifficultyLevel getDifficultyLevel() {
@@ -48,81 +50,83 @@ public class TicTacToeGame {
 
 
     /** Clear the board of all X's and O's by setting all spots to OPEN_SPOT. */
-    public void clearBoard(Button[] mBoardButtons) {
+    public void clearBoard() {
         // Reset all buttons
-        for (int i = 0; i < mBoardButtons.length; i++) {
-            mBoardButtons[i].setText(OPEN_SPOT);
-            mBoardButtons[i].setEnabled(true);
+        for (int i = 0; i < mBoard.length; i++) {
+            mBoard[i]=OPEN_SPOT;
         }
 
+    }
+    public char getBoardOccupant(int i){
+        return mBoard[i];
     }
 
     /** Return the best move for the computer to make. You must call setMove()
      * to actually make the computer move to that location.
      * @return The best move for the computer to make (0-8).
      */
-    public int getComputerMove(Button[] mBoardButtons, TextView mInfoTextView){
+    public int getComputerMove(TextView mInfoTextView){
 
         int move = -1;
 
         if (mDifficultyLevel == DifficultyLevel.Easy)
-            move = getRandomMove(mBoardButtons);
+            move = getRandomMove();
         else if (mDifficultyLevel == DifficultyLevel.Harder) {
-            move = getWinningMove(mBoardButtons, mInfoTextView);
+            move = getWinningMove( mInfoTextView);
             if (move == -1)
-                move = getRandomMove(mBoardButtons);
+                move = getRandomMove();
         }
         else if (mDifficultyLevel == DifficultyLevel.Expert) {
 
             // Try to win, but if that's not possible, block.
             // If that's not possible, move anywhere.
-            move = getWinningMove(mBoardButtons, mInfoTextView);
+            move = getWinningMove( mInfoTextView);
             if (move == -1)
-                move = getBlockingMove(mBoardButtons, mInfoTextView);
+                move = getBlockingMove( mInfoTextView);
             if (move == -1)
-                move = getRandomMove(mBoardButtons);
+                move = getRandomMove();
         }
 //mBoardButtons[move].setText(COMPUTER_PLAYER);
         return move;
     }
-    private int getWinningMove(Button[] mBoardButtons, TextView mInfoTextView){
+    private int getWinningMove(TextView mInfoTextView){
         // First see if there's a move O can make to win
         for (int i = 0; i < BOARD_SIZE; i++) {
-            if ((mBoardButtons[i].getText() != HUMAN_PLAYER) && (mBoardButtons[i].getText() != COMPUTER_PLAYER)) {
-                mBoardButtons[i].setText( COMPUTER_PLAYER);
-                if (checkForWinner( mBoardButtons,  mInfoTextView) == 3) {
+            if ((mBoard[i] != HUMAN_PLAYER) && (mBoard[i] != COMPUTER_PLAYER)) {
+                mBoard[i]= COMPUTER_PLAYER;
+                if (checkForWinner(mInfoTextView) == 3) {
                     System.out.println("Computer is moving to " + (i + 1));
                     return i;
                 }
                 else
-                    mBoardButtons[i].setText(OPEN_SPOT);
+                    mBoard[i]=OPEN_SPOT;
             }
         }
         return -1;
     }
-    private int getBlockingMove(Button[] mBoardButtons, TextView mInfoTextView){
+    private int getBlockingMove(TextView mInfoTextView){
         // See if there's a move O can make to block X from winning
         for (int i = 0; i < BOARD_SIZE; i++) {
-            if (mBoardButtons[i].getText() != HUMAN_PLAYER && mBoardButtons[i].getText() != COMPUTER_PLAYER) {
-                mBoardButtons[i].setText(HUMAN_PLAYER);
-                if (checkForWinner( mBoardButtons,  mInfoTextView) == 2) {
-                    mBoardButtons[i].setText(COMPUTER_PLAYER);
+            if (mBoard[i] != HUMAN_PLAYER && mBoard[i] != COMPUTER_PLAYER) {
+                mBoard[i]= HUMAN_PLAYER;
+                if (checkForWinner( mInfoTextView) == 2) {
+                    mBoard[i]=COMPUTER_PLAYER;
                     System.out.println("Computer is moving to " + (i + 1));
                     return i;
                 }
                 else
-                    mBoardButtons[i].setText(OPEN_SPOT);
+                    mBoard[i]=OPEN_SPOT;
             }
         }
         return -1;
     }
-    private int getRandomMove(Button[] mBoardButtons){
+    private int getRandomMove(){
         int move=-1;
         // Generate random move
         do
         {
             move = mRand.nextInt(BOARD_SIZE);
-        } while (mBoardButtons[move].getText() == HUMAN_PLAYER || mBoardButtons[move].getText() == COMPUTER_PLAYER);
+        } while (mBoard[move]== HUMAN_PLAYER || mBoard[move]== COMPUTER_PLAYER);
         return move;
     }
 
@@ -132,52 +136,52 @@ public class TicTacToeGame {
      * @return Return 0 if no winner or tie yet, 1 if it's a tie, 2 if X won,
      * or 3 if O won.
      */
-    public int checkForWinner(Button[] mBoardButtons, TextView mInfoTextView){
+    public int checkForWinner( TextView mInfoTextView){
 
         // Check horizontal wins
         for (int i = 0; i <= 6; i += 3)	{
-            if (mBoardButtons[i].getText() == HUMAN_PLAYER &&
-                    mBoardButtons[i+1].getText() == HUMAN_PLAYER &&
-                    mBoardButtons[i+2].getText() == HUMAN_PLAYER)
+            if (mBoard[i] == HUMAN_PLAYER &&
+                    mBoard[i+1] == HUMAN_PLAYER &&
+                    mBoard[i+2] == HUMAN_PLAYER)
                 return 2;
-            if (mBoardButtons[i].getText() == COMPUTER_PLAYER &&
-                    mBoardButtons[i+1].getText()== COMPUTER_PLAYER &&
-                    mBoardButtons[i+2].getText() == COMPUTER_PLAYER)
+            if (mBoard[i] == COMPUTER_PLAYER &&
+                    mBoard[i+1]== COMPUTER_PLAYER &&
+                    mBoard[i+2] == COMPUTER_PLAYER)
                 return 3;
         }
 
         // Check vertical wins
         for (int i = 0; i <= 2; i++) {
-            if (mBoardButtons[i].getText() == HUMAN_PLAYER &&
-                    mBoardButtons[i+3].getText() == HUMAN_PLAYER &&
-                    mBoardButtons[i+6].getText()== HUMAN_PLAYER)
+            if (mBoard[i] == HUMAN_PLAYER &&
+                    mBoard[i+3] == HUMAN_PLAYER &&
+                    mBoard[i+6] == HUMAN_PLAYER)
                 return 2;
-            if (mBoardButtons[i].getText() == COMPUTER_PLAYER &&
-                    mBoardButtons[i+3].getText() == COMPUTER_PLAYER &&
-                    mBoardButtons[i+6].getText()== COMPUTER_PLAYER)
+            if (mBoard[i] == COMPUTER_PLAYER &&
+                    mBoard[i+3] == COMPUTER_PLAYER &&
+                    mBoard[i+6] == COMPUTER_PLAYER)
                 return 3;
         }
 
         // Check for diagonal wins
-        if ((mBoardButtons[0].getText() == HUMAN_PLAYER &&
-                mBoardButtons[4].getText() == HUMAN_PLAYER &&
-                mBoardButtons[8].getText() == HUMAN_PLAYER) ||
-                (mBoardButtons[2].getText() == HUMAN_PLAYER &&
-                        mBoardButtons[4].getText() == HUMAN_PLAYER &&
-                        mBoardButtons[6].getText() == HUMAN_PLAYER))
+        if ((mBoard[0] == HUMAN_PLAYER &&
+                mBoard[4] == HUMAN_PLAYER &&
+                mBoard[8] == HUMAN_PLAYER) ||
+                (mBoard[2] == HUMAN_PLAYER &&
+                        mBoard[4] == HUMAN_PLAYER &&
+                        mBoard[6] == HUMAN_PLAYER))
             return 2;
-        if ((mBoardButtons[0].getText()== COMPUTER_PLAYER &&
-                mBoardButtons[4].getText() == COMPUTER_PLAYER &&
-                mBoardButtons[8].getText() == COMPUTER_PLAYER) ||
-                (mBoardButtons[2].getText() == COMPUTER_PLAYER &&
-                        mBoardButtons[4].getText() == COMPUTER_PLAYER &&
-                        mBoardButtons[6].getText() == COMPUTER_PLAYER))
+        if ((mBoard[0]== COMPUTER_PLAYER &&
+                mBoard[4] == COMPUTER_PLAYER &&
+                mBoard[8] == COMPUTER_PLAYER) ||
+                (mBoard[2] == COMPUTER_PLAYER &&
+                        mBoard[4] == COMPUTER_PLAYER &&
+                        mBoard[6] == COMPUTER_PLAYER))
             return 3;
 
         // Check for tie
         for (int i = 0; i < BOARD_SIZE; i++) {
             // If we find a number, then no one has won yet
-            if (mBoardButtons[i].getText() != HUMAN_PLAYER && mBoardButtons[i].getText() != COMPUTER_PLAYER)
+            if (mBoard[i] != HUMAN_PLAYER && mBoard[i] != COMPUTER_PLAYER)
                 return 0;
         }
 
@@ -193,14 +197,14 @@ public class TicTacToeGame {
      * @param location - The location (0-8) to place the move
      */
 
-    public void setMove(String player, int location,Button[] mBoardButtons, TextView mInfoTextView){
-        mBoardButtons[location].setEnabled(false);
-        mBoardButtons[location].setText(player);
-        if (player == TicTacToeGame.HUMAN_PLAYER)
-            mBoardButtons[location].setTextColor(Color.rgb(0, 200, 0));
-        else
-            mBoardButtons[location].setTextColor(Color.rgb(200, 0, 0));
+    public boolean setMove(char player, int location){
+        if(mBoard[location] == OPEN_SPOT) {
+            mBoard[location] = player;
+            return true;
+        }
+        return false;
     }
+
 
 }
 

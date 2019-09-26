@@ -11,8 +11,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -26,9 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
     // Represents the internal state of the game
     private TicTacToeGame mGame;
-
-    // Buttons making up the board
-    private  Button[] mBoardButtons;
+    private BoardView mBoardView;
+    private boolean mGameOver;
 
     // Various text displayed
     private TextView mInfoTextView;
@@ -44,21 +43,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mInfoTextView = findViewById(R.id.information);
-        mBoardButtons = new Button[TicTacToeGame.BOARD_SIZE];
-        mBoardButtons[0] = findViewById(R.id.one);
-        mBoardButtons[1] = findViewById(R.id.two);
-        mBoardButtons[2] = findViewById(R.id.three);
-        mBoardButtons[3] = findViewById(R.id.four);
-        mBoardButtons[4] = findViewById(R.id.five);
-        mBoardButtons[5] = findViewById(R.id.six);
-        mBoardButtons[6] = findViewById(R.id.seven);
-        mBoardButtons[7] = findViewById(R.id.eight);
-        mBoardButtons[8] = findViewById(R.id.nine);
+
         mTextAndroid = findViewById(R.id.ptsAndroid);
         mTextHuman = findViewById(R.id.ptsHuman);
         mTextTie = findViewById(R.id.ptsTie);
 
         mGame = new TicTacToeGame();
+        mBoardView = findViewById(R.id.board);
+        mBoardView.setGame(mGame);
+        // Listen for touches on the board
+        mBoardView.setOnTouchListener(mTouchListener);
+
         mTextTie.setText("0");
         mTextHuman.setText("0");
         mTextAndroid.setText("0");
@@ -66,11 +61,10 @@ public class MainActivity extends AppCompatActivity {
     }
     // Set up the game board.
     private void startNewGame() {
+        mGameOver= false;
+        mGame.clearBoard();
+        mBoardView.invalidate();   // Redraw the board
 
-        mGame.clearBoard(mBoardButtons);
-        for (int i = 0; i < mBoardButtons.length; i++)
-            mBoardButtons[i].setOnClickListener(new ButtonClickListener(i));
-        // Human goes first
         mInfoTextView.setText(R.string.turn_human);
 
     }
@@ -179,43 +173,42 @@ public class MainActivity extends AppCompatActivity {
         return dialog;
     }
 
+    // Listen for touches on the board
+    private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
+        public boolean onTouch(View v, MotionEvent event) {
 
-    public class ButtonClickListener implements View.OnClickListener {
-        int location;
+            // Determine which cell was touched
+            int col = (int) event.getX() / mBoardView.getBoardCellWidth();
+            int row = (int) event.getY() / mBoardView.getBoardCellHeight();
+            int pos = row * 3 + col;
 
-        public ButtonClickListener(int location) {
-            this.location = location;
-        }
-        //@Override
-        public void onClick(View view) {
-            if (mBoardButtons[location].isEnabled()) {
-                mGame.setMove(TicTacToeGame.HUMAN_PLAYER, location, mBoardButtons,  mInfoTextView);
+            if (!mGameOver && setMove(TicTacToeGame.HUMAN_PLAYER, pos))	{
 
                 // If no winner yet, let the computer make a move
-                int winner = mGame.checkForWinner( mBoardButtons,  mInfoTextView);
+                int winner = mGame.checkForWinner(   mInfoTextView);
                 if (winner == 0) {
                     mInfoTextView.setText(R.string.turn_android);
-                    int move = mGame.getComputerMove( mBoardButtons,  mInfoTextView);
-                    mGame.setMove(TicTacToeGame.COMPUTER_PLAYER, move, mBoardButtons,  mInfoTextView);
-                    winner = mGame.checkForWinner( mBoardButtons,  mInfoTextView);
+                    int move = mGame.getComputerMove(   mInfoTextView);
+                    mGame.setMove(TicTacToeGame.COMPUTER_PLAYER, move);
+                    winner = mGame.checkForWinner(   mInfoTextView);
                 }
 
                 if (winner == 0)
                     mInfoTextView.setText(R.string.turn_human);
                 else{
-                    for (int i = 0; i < mBoardButtons.length; i++)
-                        mBoardButtons[i].setEnabled(false);
                     if (winner == 1) {
                         mInfoTextView.setText(R.string.result_tie);
                         mGame.mPtsTie+=1;
                         mTextTie.setText(String.valueOf(mGame.mPtsTie));
                     }
                     else if (winner == 2) {
+                        mGameOver=true;
                         mInfoTextView.setText(R.string.result_human_wins);
                         mGame.mPtsHuman += 1;
                         mTextHuman.setText(String.valueOf(mGame.mPtsHuman));
                     }
                     else {
+                        mGameOver=true;
                         mInfoTextView.setText(R.string.result_android_wins);
                         mGame.mPtsAndroid+=1;
                         mTextAndroid.setText(String.valueOf(mGame.mPtsAndroid));
@@ -223,8 +216,18 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println(mGame.mPtsHuman + " " + mGame.mPtsTie + " " + mGame.mPtsAndroid);
                 }
             }
-        }
 
+            // So we aren't notified of continued events when finger is moved
+            return false;
+        }
+    };
+
+    private boolean setMove(char player, int location) {
+        if (mGame.setMove(player, location)) {
+            mBoardView.invalidate();   // Redraw the board
+            return true;
+        }
+        return false;
     }
 
 }
