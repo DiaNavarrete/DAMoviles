@@ -8,10 +8,10 @@
         android:title="New Game"
         android:visible="true" />
     <item
-        android:id="@+id/ai_difficulty"
+        android:id="@+id/settings"
         android:enabled="true"
-        android:icon="@drawable/difficulty_level"
-        android:title="Difficulty"
+        android:icon="@drawable/settings"
+        android:title="Settings"
         android:visible="true" />
     <item
         android:id="@+id/about"

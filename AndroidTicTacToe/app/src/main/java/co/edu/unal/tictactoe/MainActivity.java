@@ -7,8 +7,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,7 +25,6 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    static final int DIALOG_DIFFICULTY_ID = 0;
     static final int DIALOG_ABOUT_ID=1;
     static final int DIALOG_QUIT_ID = 2;
 
@@ -30,10 +32,11 @@ public class MainActivity extends AppCompatActivity {
     private TicTacToeGame mGame;
     private BoardView mBoardView;
     private boolean mGameOver;
+    private boolean mSoundOn;
     private MediaPlayer mHumanMediaPlayer;
     private MediaPlayer mComputerMediaPlayer;
 
-
+    private SharedPreferences mPrefs;
 
     // Various text displayed
     private TextView mInfoTextView;
@@ -63,6 +66,18 @@ public class MainActivity extends AppCompatActivity {
         mTextTie.setText("0");
         mTextHuman.setText("0");
         mTextAndroid.setText("0");
+        // Restore the scores from the persistent preference data source
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mSoundOn = mPrefs.getBoolean("sound", true);
+        String difficultyLevel = mPrefs.getString("difficulty_level",
+                getResources().getString(R.string.difficulty_harder));
+        if (difficultyLevel.equals(getResources().getString(R.string.difficulty_easy)))
+            mGame.setDifficultyLevel(TicTacToeGame.DifficultyLevel.Easy);
+        else if (difficultyLevel.equals(getResources().getString(R.string.difficulty_harder)))
+            mGame.setDifficultyLevel(TicTacToeGame.DifficultyLevel.Harder);
+        else
+            mGame.setDifficultyLevel(TicTacToeGame.DifficultyLevel.Expert);
+
         startNewGame();
     }
     // Set up the game board.
@@ -109,8 +124,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.new_game:
                 startNewGame();
                 return true;
-            case R.id.ai_difficulty:
-                showDialog(DIALOG_DIFFICULTY_ID);
+            case R.id.settings:
+                startActivityForResult(new Intent(this, Settings.class), 0);
                 return true;
             case R.id.about:
                 showDialog(DIALOG_ABOUT_ID);
@@ -123,12 +138,34 @@ public class MainActivity extends AppCompatActivity {
 
     }
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RESULT_CANCELED) {
+            // Apply potentially new settings
+
+            mSoundOn = mPrefs.getBoolean("sound", true);
+
+            String difficultyLevel = mPrefs.getString("difficulty_level",
+                    getResources().getString(R.string.difficulty_harder));
+
+            if (difficultyLevel.equals(getResources().getString(R.string.difficulty_easy)))
+                mGame.setDifficultyLevel(TicTacToeGame.DifficultyLevel.Easy);
+            else if (difficultyLevel.equals(getResources().getString(R.string.difficulty_harder)))
+                mGame.setDifficultyLevel(TicTacToeGame.DifficultyLevel.Harder);
+            else
+                mGame.setDifficultyLevel(TicTacToeGame.DifficultyLevel.Expert);
+        }
+    }
+
+
+    @Override
     protected Dialog onCreateDialog(int id) {
         Dialog dialog = null;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         switch(id) {
-            case DIALOG_DIFFICULTY_ID:
+           /* case DIALOG_DIFFICULTY_ID:
 
                 builder.setTitle(R.string.difficulty_choose);
 
@@ -162,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                         });
                 dialog = builder.create();
 
-                break;
+                break;*/
             case DIALOG_ABOUT_ID:
                 builder = new AlertDialog.Builder(this);
                 Context context = getApplicationContext();
@@ -226,7 +263,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else if (winner == 2) {
                         mGameOver=true;
-                        mInfoTextView.setText(R.string.result_human_wins);
+                        String defaultMessage = getResources().getString(R.string.result_human_wins);
+                        mInfoTextView.setText(mPrefs.getString("victory_message",defaultMessage));
                         mGame.mPtsHuman += 1;
                         mTextHuman.setText(String.valueOf(mGame.mPtsHuman));
                     }
