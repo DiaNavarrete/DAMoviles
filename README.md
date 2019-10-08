@@ -27,3 +27,6 @@ Propuesta de proyecto
 
 ## Reto 5
 [Gráficos y audio](https://github.com/DiaNavarrete/DAMoviles/tree/reto5)
+
+## Reto 6
+[Preferencias](https://github.com/DiaNavarrete/DAMoviles/tree/reto6)
