@@ -165,41 +165,6 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         switch(id) {
-           /* case DIALOG_DIFFICULTY_ID:
-
-                builder.setTitle(R.string.difficulty_choose);
-
-                final CharSequence[] levels = {
-                        getResources().getString(R.string.difficulty_easy),
-                        getResources().getString(R.string.difficulty_harder),
-                        getResources().getString(R.string.difficulty_expert)};
-
-                // TODO: Set selected, an integer (0 to n-1), for the Difficulty dialog.
-                // selected is the radio button that should be selected.
-                int selected=2;
-                TicTacToeGame.DifficultyLevel level= mGame.getDifficultyLevel();
-                if(level == TicTacToeGame.DifficultyLevel.Easy) selected=0;
-                else if(level == TicTacToeGame.DifficultyLevel.Harder) selected=1;
-                builder.setSingleChoiceItems(levels, selected,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int item) {
-                                dialog.dismiss();   // Close dialog
-                                // TODO: Set the diff level of mGame based on which item was selected.
-                                TicTacToeGame.DifficultyLevel new_level = TicTacToeGame.DifficultyLevel.Easy;
-                                if (item == 1) new_level = TicTacToeGame.DifficultyLevel.Harder;
-                                else if (item == 2)
-                                    new_level = TicTacToeGame.DifficultyLevel.Expert;
-                                if(mGame.setDifficultyLevel(new_level))
-                                    startNewGame();
-
-                                // Display the selected difficulty level
-                                Toast.makeText(getApplicationContext(), levels[item],
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                dialog = builder.create();
-
-                break;*/
             case DIALOG_ABOUT_ID:
                 builder = new AlertDialog.Builder(this);
                 Context context = getApplicationContext();
@@ -285,7 +250,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean setMove(char player, int location) {
         if (mGame.setMove(player, location)) {
-            if(player== TicTacToeGame.HUMAN_PLAYER){
+            if(mSoundOn && player== TicTacToeGame.HUMAN_PLAYER){
                 mHumanMediaPlayer.start();
 
             }
