@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Directorio</string>
+    <string name="titulo">Directorio de Empresas</string>
+    <string name="add">Agregar Empresa</string>
+    <string name="update">Actualizar Empresa</string>
+    <string name="eliminar">Eliminar Empresa</string>
+    <string name="buscar">Buscar</string>
+    <string name="in_nombre">Nombre Empresa</string>
+    <string name="in_url">Página Web</string>
+    <string name="in_tel">Teléfono de contacto </string>
+    <string name="in_correo">Correo</string>
+    <string name="in_prod">Productos y Servicios</string>
+    <string name="in_tipo">Tipo de Empresa</string>
+    <string name="tipo_consul">Consultoría</string>
+    <string name="tipo_medida">Desarrollo a la medida</string>
+    <string name="tipo_fabrica">Fábrica de software</string>
+    <string name="guardar_btn">Guardar</string>
+    <string name="editar_btn">Editar</string>
+    <string name="eliminar_btn">eliminar</string>
+    <string name="pregunta">¿Está seguro de eliminar esta empresa?</string>
+    <string name="si">SI</string>
+    <string name="no">NO</string>
+</resources>
