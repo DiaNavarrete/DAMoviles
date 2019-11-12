@@ -30,3 +30,6 @@ Propuesta de proyecto
 
 ## Reto 6
 [Preferencias](https://github.com/DiaNavarrete/DAMoviles/tree/reto6)
+
+## Reto 8
+[SQLite](https://github.com/DiaNavarrete/DAMoviles/tree/reto8)
