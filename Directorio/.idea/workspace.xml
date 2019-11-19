@@ -12,60 +12,7 @@
     <bookmark url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" line="99" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9575a2f6-f24c-41cf-958a-dd57bcf0aa70" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/DB/EmpresDBHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/DB/EmpresOperations.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/co/edu/unal/directorio/AddUpdateActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/model/Empresa.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/edit_text.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/icon_clear.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/icon_delete.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/icon_edit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/icon_new.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/icon_search.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_update.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/proguard-rules.pro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/androidTest/java/co/edu/unal/directoriodeempresas/ExampleInstrumentedTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/java/co/edu/unal/directoriodeempresas/MainActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/res/layout/content_main.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/res/menu/menu_main.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/res/values/colors.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/res/values/dimens.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/main/res/values/styles.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/app/src/test/java/co/edu/unal/directoriodeempresas/ExampleUnitTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DirectoriodeEmpresas/settings.gradle" afterDir="false" />
-    </list>
+    <list default="true" id="9575a2f6-f24c-41cf-958a-dd57bcf0aa70" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +22,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="4QBDU16B29000281" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_5X_API_29_x86" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -151,9 +98,6 @@
               <caret line="126" column="92" selection-start-line="126" selection-start-column="92" selection-end-line="126" selection-end-column="92" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5661#5672#0" expanded="true" />
-                <element signature="e#5663#6232#0" expanded="true" />
-                <element signature="e#6231#6232#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -210,10 +154,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1374" />
-    <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="x" value="170" />
+    <option name="y" value="91" />
+    <option name="width" value="1026" />
+    <option name="height" value="546" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -223,7 +167,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
@@ -306,10 +250,11 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
@@ -406,7 +351,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1374" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" side_tool="true" />
@@ -422,8 +367,8 @@
       <window_info anchor="bottom" id="TODO" order="1" />
       <window_info anchor="bottom" id="Terminal" order="2" weight="0.3289689" />
       <window_info anchor="bottom" id="Event Log" order="3" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Build" order="4" visible="true" weight="0.3289689" />
-      <window_info anchor="bottom" id="Android Profiler" order="5" />
+      <window_info anchor="bottom" id="Build" order="4" visible="true" weight="0.3289689" />
+      <window_info anchor="bottom" id="Android Profiler" order="5" show_stripe_button="false" />
       <window_info anchor="bottom" id="Logcat" order="6" weight="0.3289689" />
       <window_info anchor="bottom" id="Run" order="7" weight="0.39116204" />
       <window_info anchor="bottom" id="Debug" order="8" weight="0.7119476" />
@@ -570,9 +515,6 @@
           <caret line="126" column="92" selection-start-line="126" selection-start-column="92" selection-end-line="126" selection-end-column="92" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5661#5672#0" expanded="true" />
-            <element signature="e#5663#6232#0" expanded="true" />
-            <element signature="e#6231#6232#0" expanded="true" />
           </folding>
         </state>
       </provider>
