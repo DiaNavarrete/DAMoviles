@@ -39,6 +39,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+    private static final String EXTRA_R = "co.edu.unal.radius";
 
     private GoogleMap mMap;
     private Location currentLocation;
@@ -53,7 +54,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        km=1;
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fetchLastLocation();
         Places.initialize(getApplicationContext(), "AIzaSyDYb7MLGkYxBoFGXd66IwVCRypI_EDH88E");
@@ -101,9 +101,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     for (PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
                         Place p = placeLikelihood.getPlace();
                         mMap.addMarker(new MarkerOptions().position(p.getLatLng()).title(p.getName()));
-                        Log.i("MAPI", String.format("Place '%s' has likelihood: %f",
+                        Log.i("MAPI", String.format("Place '%s' is located : %s",
                                 placeLikelihood.getPlace().getName(),
-                                placeLikelihood.getLikelihood()));
+                                p.getLatLng().toString()));
                     }
                 } else {
                     Exception exception = task.getException();
@@ -134,6 +134,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         baseMarker=mMap.addMarker(new MarkerOptions().position(latLng)
                                             .draggable(true)
                                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+
+        km = getIntent().getIntExtra(EXTRA_R,1);
+        Log.e("MAPI", "Radio: " + km);
         circle = mMap.addCircle(new CircleOptions()
                 .center(latLng)
                 .radius(km*1000));
