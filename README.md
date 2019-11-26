@@ -35,4 +35,4 @@ Propuesta de proyecto
 [SQLite](https://github.com/DiaNavarrete/DAMoviles/tree/reto8)
 
 ## Reto 9 
-[Accediendo al GPS](https://github.com/DiaNavarrete/DAMoviles/tree/reto9)
+[Accediendo al GPS](https://github.com/DiaNavarrete/DAMoviles/tree/reto9/Mapa)
