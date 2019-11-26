@@ -40,6 +40,7 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     private static final String EXTRA_R = "co.edu.unal.radius";
+    private static  final String key ="AIzaSyAq_bkmNOizXSlH4-zOFHeC-uCWqNpD-8Y";
 
     private GoogleMap mMap;
     private Location currentLocation;
@@ -55,10 +56,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        fetchLastLocation();
-        Places.initialize(getApplicationContext(), "AIzaSyDYb7MLGkYxBoFGXd66IwVCRypI_EDH88E");
+        Places.initialize(getApplicationContext(), key);
         placesClient = Places.createClient(this);
-        setNearbyPlaces();
+        fetchLastLocation();
     }
 
     private void fetchLastLocation() {
@@ -110,13 +110,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     if (exception instanceof ApiException) {
                         ApiException apiException = (ApiException) exception;
                         Log.e("MAPI", "Place not found: " + apiException.getStatusCode());
+                        Toast.makeText(getApplicationContext(),
+                                "Error " + + apiException.getStatusCode(),
+                                Toast.LENGTH_SHORT).show();
+
                     }
                 }
             }
         });
     }
 
+    private void setNearbyPlacesV2(){
+        Log.e("MAPI", "nearby function");
+        LatLng p =baseMarker.getPosition();
+        String stringfind = "colegio";
+       // StringBuilder googlePlaceURL= new StringBuilder("https://maps.googleapis.com/maps/@api=1/&");
+        StringBuilder googlePlaceURL= new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        googlePlaceURL.append("location=" + p.latitude+","+p.longitude);
+        googlePlaceURL.append("&radius="+(km*1000));
+        googlePlaceURL.append("&type="+stringfind);
+        googlePlaceURL.append("&sensor=true");
+        googlePlaceURL.append("&key="+ key);
 
+        Object dataTransfer[]= new Object[2];
+        dataTransfer[0]=mMap;
+        dataTransfer[1]=googlePlaceURL.toString();
+        GetNearbyPlacesData getNearbyPlacesData= new GetNearbyPlacesData();
+        getNearbyPlacesData.execute(dataTransfer);
+    }
 
 
     @Override
@@ -133,14 +154,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
         baseMarker=mMap.addMarker(new MarkerOptions().position(latLng)
                                             .draggable(true)
+                                .visible(false)
                                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
 
         km = getIntent().getIntExtra(EXTRA_R,1);
         Log.e("MAPI", "Radio: " + km);
-        circle = mMap.addCircle(new CircleOptions()
+       /* circle = mMap.addCircle(new CircleOptions()
                 .center(latLng)
                 .radius(km*1000));
-               // .strokeColor(Color.RED)
+         */      // .strokeColor(Color.RED)
                 ///.fillColor(Color.BLUE));
         mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
             @Override
@@ -163,8 +185,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //.icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow)));
         mMap.setMyLocationEnabled(true);
         Log.e("MAPI", "My location");
+        setNearbyPlaces();
     }
     private void PutPlaces(List<Place> places){
+        mMap.clear();
         for(Place p:places)
             mMap.addMarker(new MarkerOptions().position(p.getLatLng()).title(p.getName()));
 

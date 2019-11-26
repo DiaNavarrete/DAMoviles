@@ -20,4 +20,5 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="radius">Set radius</string>
     <string name="ok">ok</string>
+    <string name="google_maps_key">AIzaSyAq_bkmNOizXSlH4-zOFHeC-uCWqNpD-8Y</string>
 </resources>
