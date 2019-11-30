@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddUpdateActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="10dip"
+        android:paddingTop="5dip"
+        android:paddingRight="10dip"
+        tools:layout_editor_absoluteX="219dp"
+        tools:layout_editor_absoluteY="311dp">
+
+        <EditText
+            android:id="@+id/input_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/in_nombre"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:textColor="@drawable/edit_text"  />
+
+        <EditText
+            android:id="@+id/input_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:ems="10"
+            android:hint="@string/in_url"
+            android:importantForAutofill="no"
+            android:inputType="textUri|textPersonName"
+            android:textColor="@drawable/edit_text"  />
+
+        <EditText
+            android:id="@+id/input_tel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:ems="10"
+            android:hint="@string/in_tel"
+            android:importantForAutofill="no"
+            android:inputType="phone"
+            android:textColor="@drawable/edit_text" />
+
+        <EditText
+            android:id="@+id/input_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:ems="10"
+            android:hint="@string/in_correo"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:textColor="@drawable/edit_text" />
+
+        <EditText
+            android:id="@+id/input_prods"
+            android:layout_width="match_parent"
+            android:layout_height="119dp"
+            android:layout_marginTop="5dip"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="@string/in_prod"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:textColor="@drawable/edit_text" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:text="@string/in_tipo" />
+
+        <CheckBox
+            android:id="@+id/input_tipo_cons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dip"
+            android:onClick="onCheckBoxClicked"
+            android:text="@string/tipo_consul"
+            android:textColor="@drawable/edit_text"/>
+
+        <CheckBox
+            android:id="@+id/input_tipo_medida"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dip"
+            android:onClick="onCheckBoxClicked"
+            android:text="@string/tipo_medida"
+            android:textColor="@drawable/edit_text" />
+
+        <CheckBox
+            android:id="@+id/input_tipo_fab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dip"
+            android:onClick="onCheckBoxClicked"
+            android:text="@string/tipo_fabrica"
+            android:textColor="@drawable/edit_text"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dip"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_eliminar"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/eliminar_btn" />
+
+            <Button
+                android:id="@+id/btn_guardar"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:text="@string/guardar_btn" />
+
+            <Button
+                android:id="@+id/btn_editar"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/editar_btn" />
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
