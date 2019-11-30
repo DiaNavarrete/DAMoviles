@@ -31,19 +31,47 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/icono" />
 
-    <EditText
-        android:id="@+id/rinput"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="@dimen/places_autocomplete_powered_by_google_separator_start"
-        android:layout_marginTop="@dimen/places_autocomplete_powered_by_google_separator_start"
-        android:layout_marginEnd="@dimen/places_autocomplete_powered_by_google_separator_start"
-        android:hint="@string/radius"
-        android:importantForAutofill="no"
-        android:inputType="number">
+        android:layout_marginStart="@android:dimen/app_icon_size"
+        android:layout_marginTop="@android:dimen/app_icon_size"
+        android:layout_marginEnd="@android:dimen/app_icon_size"
+        android:orientation="horizontal">
 
-    </EditText>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|end"
+            android:text="@string/radio"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/rinput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/cardview_compat_inset_shadow"
+            android:layout_weight="1"
+            android:hint="@string/radius"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:textAlignment="center">
+
+        </EditText>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/km"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
 </LinearLayout>
 

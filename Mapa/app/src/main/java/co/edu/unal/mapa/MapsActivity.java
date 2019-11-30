@@ -6,9 +6,15 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.ApiException;
@@ -40,24 +46,46 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     private static final String EXTRA_R = "co.edu.unal.radius";
-    private static  final String key ="AIzaSyAq_bkmNOizXSlH4-zOFHeC-uCWqNpD-8Y";
-
+    private String key ;
     private GoogleMap mMap;
     private Location currentLocation;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private PlacesClient placesClient;
     private static final int REQUEST_CODE = 101;
     private Marker baseMarker;
+    private SearchView mSearchView;
     private Circle circle;
     private int km;
+    private LatLng p;
+    private String texttoFind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        key=getString(R.string.key);
+        Log.i("MAPI",key);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         Places.initialize(getApplicationContext(), key);
         placesClient = Places.createClient(this);
+        mSearchView= findViewById(R.id.search);
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                Log.i("MAPI",s);
+                texttoFind=s;
+                setNearbyPlacesV2(s);
+                mMap.addCircle(new CircleOptions()
+                        .center(p)
+                        .radius(km));
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
         fetchLastLocation();
     }
 
@@ -120,21 +148,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
-    private void setNearbyPlacesV2(){
+    private void setNearbyPlacesV2(String stringfind){
         Log.e("MAPI", "nearby function");
-        LatLng p =baseMarker.getPosition();
-        String stringfind = "colegio";
-       // StringBuilder googlePlaceURL= new StringBuilder("https://maps.googleapis.com/maps/@api=1/&");
+        p =new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
+                //baseMarker.getPosition();
+    //    StringBuilder googlePlaceURL= new StringBuilder("https://maps.googleapis.com/maps/@api=1&");
+   /*     StringBuilder googlePlaceURL= new StringBuilder("https://maps.googleapis.com/maps/api/geocode/json?");
+        googlePlaceURL.append("latlng="+p.latitude+","+p.longitude+"&sensor=false");*/
         StringBuilder googlePlaceURL= new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
         googlePlaceURL.append("location=" + p.latitude+","+p.longitude);
-        googlePlaceURL.append("&radius="+(km*1000));
-        googlePlaceURL.append("&type="+stringfind);
-        googlePlaceURL.append("&sensor=true");
+        googlePlaceURL.append("&radius="+(km-500));
+        if(stringfind!="")  googlePlaceURL.append("&keyword="+stringfind);
         googlePlaceURL.append("&key="+ key);
 
         Object dataTransfer[]= new Object[2];
         dataTransfer[0]=mMap;
         dataTransfer[1]=googlePlaceURL.toString();
+        mMap.clear();
         GetNearbyPlacesData getNearbyPlacesData= new GetNearbyPlacesData();
         getNearbyPlacesData.execute(dataTransfer);
     }
@@ -151,7 +181,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
        // mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
        // mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
         baseMarker=mMap.addMarker(new MarkerOptions().position(latLng)
                                             .draggable(true)
                                 .visible(false)
@@ -159,11 +189,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         km = getIntent().getIntExtra(EXTRA_R,1);
         Log.e("MAPI", "Radio: " + km);
-       /* circle = mMap.addCircle(new CircleOptions()
+     /*   circle = mMap.addCircle(new CircleOptions()
                 .center(latLng)
-                .radius(km*1000));
-         */      // .strokeColor(Color.RED)
-                ///.fillColor(Color.BLUE));
+                .radius(km));
         mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
             @Override
             public void onMarkerDragStart(Marker marker) {}
@@ -181,18 +209,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
 
             }
-        });
-        //.icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow)));
+        });*/
         mMap.setMyLocationEnabled(true);
         Log.e("MAPI", "My location");
-        setNearbyPlaces();
+        setNearbyPlacesV2("");
     }
-    private void PutPlaces(List<Place> places){
-        mMap.clear();
-        for(Place p:places)
-            mMap.addMarker(new MarkerOptions().position(p.getLatLng()).title(p.getName()));
 
-    }
 
 
     @Override

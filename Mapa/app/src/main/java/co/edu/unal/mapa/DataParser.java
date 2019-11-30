@@ -13,7 +13,6 @@ public class DataParser {
     private HashMap<String, String> getPlace(JSONObject googlePlaceJson){
         HashMap<String, String> googlePlaceMap= new HashMap<>();
         String placeName="-NA-";
-        String vecinity ="-NA-";
         String latitude="";
         String longitude="";
         String reference="";
@@ -21,15 +20,11 @@ public class DataParser {
             if(!googlePlaceJson.isNull("name")){
                 placeName = googlePlaceJson.getString("name");
             }
-            if(!googlePlaceJson.isNull("vecinity")){
-                vecinity = googlePlaceJson.getString("vecinity");
-            }
             latitude=googlePlaceJson.getJSONObject("geometry").getJSONObject("location").getString("lat");
             longitude=googlePlaceJson.getJSONObject("geometry").getJSONObject("location").getString("lng");
             reference = googlePlaceJson.getString("reference");
 
             googlePlaceMap.put("place_name", placeName);
-            googlePlaceMap.put("vecinity", vecinity);
             googlePlaceMap.put("lat",latitude);
             googlePlaceMap.put("lng",longitude);
             googlePlaceMap.put("reference",reference);
