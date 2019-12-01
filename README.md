@@ -32,7 +32,10 @@ Propuesta de proyecto
 [Preferencias](https://github.com/DiaNavarrete/DAMoviles/tree/reto6)
 
 ## Reto 8
-[SQLite](https://github.com/DiaNavarrete/DAMoviles/tree/reto8)
+[SQLite](https://github.com/DiaNavarrete/DAMoviles/tree/reto8/Directorio)
 
 ## Reto 9 
 [Accediendo al GPS](https://github.com/DiaNavarrete/DAMoviles/tree/reto9/Mapa)
+
+## Reto 10
+[Consumiendo Webservices](https://github.com/DiaNavarrete/DAMoviles/tree/master/app)
