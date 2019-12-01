@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Webservices</string>
+    <string name="operadores">Operadores:</string>
+    <string name="a_o">Año:</string>
+    <string name="kpi">KPI</string>
+    <string name="first">2016</string>
+    <string name="second">2017</string>
+    <string name="third">2018</string>>
+    <string name="filter">Ordenar por:</string>
+    <string name="titulo">Medición de Calidad de Servicios de Datos Fijos</string>
+</resources>

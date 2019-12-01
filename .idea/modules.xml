@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/DAMoviles.iml" filepath="$PROJECT_DIR$/.idea/DAMoviles.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Webservices.iml" filepath="$PROJECT_DIR$/Webservices.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>
